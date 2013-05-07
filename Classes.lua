@@ -1,5 +1,26 @@
-local Test = WoWTest:NewModule('Test')
-Test.__index = Test
+local Group, Test = {}, {}
+
+
+--[[ Group ]]--
+
+function Group:New(name)
+	return setmetatable({name = name, tests = {}}, self)
+end
+
+function Group:__newindex(key, value)
+	if type(value) == 'function' then
+		self.tests[key] = Test:New(value)
+	end
+end
+
+function Group:__call()
+	for name, test in pairs(self.tests) do
+		test()
+	end
+end
+
+
+--[[ Test ]]--
 
 function Test:New(func)
 	local test = {
@@ -27,3 +48,6 @@ function Test__call(...)
 		tinsert(self.errors, message)
 	end
 end
+
+Test.__index = Test
+WoWTest.Group = Group
