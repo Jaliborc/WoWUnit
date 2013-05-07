@@ -1,0 +1,12 @@
+## Interface: 50200
+## Title: |cffE5E5E5WoWTest|r
+## Notes: 
+
+## Author: Jaliborc (João Cardoso)
+## X-License: GNU General Public License Version 3
+## X-Category: Developer Tools
+## Version: 1
+
+Frames.xml
+Code.lua
+Mock.lua

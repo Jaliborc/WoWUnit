@@ -1,0 +1,51 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+	<Frame name="WoWTest" parent="UIParent" inherits="BasicFrameTemplateWithInset" hidden="true">
+		<Size x="280" y="400"/>
+		<Anchors>
+			<Anchor point="CENTER" x="0" y="0"/>
+		</Anchors>
+		
+        <Frames>
+			<ScrollFrame parentKey='Display' name="$parentDisplay" inherits="HybridScrollFrameTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT" x="10" y="-27"/>
+					<Anchor point="BOTTOMRIGHT" x="-25" y="7"/>
+				</Anchors>
+				<Frames>
+					<Slider name="$parentBar" inherits="HybridScrollBarTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="TOPRIGHT" x="-1" y="-12"/>
+							<Anchor point="BOTTOMLEFT" relativePoint="BOTTOMRIGHT" x="-1" y="11"/>
+						</Anchors>
+					</Slider>
+				</Frames>
+			</ScrollFrame>
+		</Frames>
+	</Frame>
+
+	<Button name="WoWTestButtonTemplate" inherits="ReputationBarTemplate" virtual="true">
+		<Scripts>
+			<OnLoad>
+				local name = self:GetName()
+
+				self.Text = _G[self .. 'FactionName']
+				self.Bar = _G[self .. 'ReputationBar']
+				self.Bar.Text = _G[self .. 'ReputationBarFactionStanding']
+				self.LFGBonusRepButton:Hide()
+			</OnLoad>
+		</Scripts>
+	</Button>
+
+	<Button name="WoWTestButton" parent="UIParent" inherits="UIPanelButtonTemplate">
+		<Anchors>
+			<Anchor point="BOTTOMRIGHT" x="-50" y="50"/>
+		</Anchors>
+
+		<Scripts>
+			<OnClick>
+				WoWTest:SetShown(not WoWTest:IsShown())
+			</OnClick>
+		</Scripts>
+	</Button>
+</Ui>
