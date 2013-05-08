@@ -1,13 +1,11 @@
-Addon:NewGroup('Bagnon'), {
-	function GetItemInfo() end,
-	function GetHyperlink() end,
-	function ProcessLink() end,
-	function IsItemUnusable() end
-})
+local bagnon = WoWTest:NewGroup('Bagnon')
+function bagnon:GetItemInfo() end
+function bagnon:GetHyperlink() end
+function bagnon:ProcessLink() end
+function bagnon:IsItemUnusable() end
 
-Addon:NewGroup('PetTracker'), {
-	function GetProgress() end,
-	function IsEnemy() end,
-	function IsFriendly() end,
-	function Yo() end
-})
+WoWTest:NewGroup('PetTracker')
+function bagnon:GetProgress() end
+function bagnon:IsEnemy() end
+function bagnon:IsFriendly() end
+function bagnon:Yo() end

@@ -1,12 +1,12 @@
-local Events = {}
-local Groups = {}
+local Groups, Events = {}, {}
 local Replaces = {}
+WoWTest.groups = Groups
 
 
 --[[ Registry ]]--
 
 function WoWTest:NewGroup(name, ...)
-	local group = Group:New(name)
+	local group = self.Group:New(name)
 	tinsert(Groups, group)
 
 	if ... then
@@ -72,17 +72,16 @@ local function Difference(a, b)
 		end
 		
 	elseif a ~= b then
-			return "", a, b
-		end
+		return "", a, b
 	end
 end
 
 function WoWTest.AreEqual(a, b)
 	local path, a, b = Difference(a, b)
 	if path then 
-		local message = "Expected %s, got %s.":format(a, b)
+		local message = strformat("Expected %s, got %s.", a, b)
 		if path ~= "" then
-			message = "Tables differ at %s:|n  ":format(path) .. message
+			message = strformat("Tables differ at %s:|n  ", path) .. message
 		end
 
 		error(message, 2)
@@ -91,6 +90,6 @@ end
 
 function WoWTest.Exists(value)
 	if not value then
-		error("Expected some value, got %s.":format(value), 2)
+		error(strformat("Expected some value, got %s.", value), 2)
 	end
 end

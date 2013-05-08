@@ -7,6 +7,11 @@
 ## X-Category: Developer Tools
 ## Version: 1
 
-Frames.xml
-Code.lua
+Interface\Frames.xml
+Interface\Display.lua
+
+Classes\Group.lua
+Classes\Test.lua
+
+API.lua
 Mock.lua

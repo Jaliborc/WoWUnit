@@ -29,9 +29,9 @@
 			<OnLoad>
 				local name = self:GetName()
 
-				self.Text = _G[self .. 'FactionName']
-				self.Bar = _G[self .. 'ReputationBar']
-				self.Bar.Text = _G[self .. 'ReputationBarFactionStanding']
+				self.Text = _G[name .. 'FactionName']
+				self.Bar = _G[name .. 'ReputationBar']
+				self.Bar.Text = _G[name .. 'ReputationBarFactionStanding']
 				self.LFGBonusRepButton:Hide()
 			</OnLoad>
 		</Scripts>
@@ -39,7 +39,7 @@
 
 	<Button name="WoWTestButton" parent="UIParent" inherits="UIPanelButtonTemplate">
 		<Anchors>
-			<Anchor point="BOTTOMRIGHT" x="-50" y="50"/>
+			<Anchor point="BOTTOMRIGHT" x="-50" y="100"/>
 		</Anchors>
 
 		<Scripts>
