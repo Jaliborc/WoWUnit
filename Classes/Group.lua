@@ -9,20 +9,13 @@ function Group:New(name)
 	return setmetatable({name = name, tests = {}}, self)
 end
 
-function Group:AnySuccess()
+function Group:Status()
+	local status = 0
 	for _, test in pairs(self.tests) do
-		if test:AnySuccess() then
-			return true
-		end
+		status = max(test:Status(), status)
 	end
-end
 
-function Group:AnyError()
-	for _, test in pairs(self.tests) do
-		if test:AnyError() then
-			return true
-		end
-	end
+	return status
 end
 
 
@@ -36,7 +29,7 @@ end
 
 function Group:__newindex(key, value)
 	if type(value) == 'function' then
-		tinsert(self.tests, Test:New(key, value))
+		tinsert(self.tests, WoWTest.UnitTest:New(key, value))
 	end
 end
 

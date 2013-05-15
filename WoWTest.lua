@@ -1,6 +1,5 @@
 local Groups, Events = {}, {}
 local Replaces = {}
-WoWTest.groups = Groups
 
 
 --[[ Registry ]]--
@@ -14,13 +13,14 @@ function WoWTest:NewGroup(name, ...)
 			self:AddToEvent(group, select(i, ...))
 		end
 	else
-		self:AddToEvent(group, 'STARTUP')
+		self:AddToEvent(group, 'PLAYER_ENTERING_WORLD')
 	end
 
 	return group
 end
 
 function WoWTest:AddToEvent(group, event)
+	self:RegisterEvent(event)
 	Events[event] = Events[event] or {}
 	tinsert(Events[event], group)
 end
@@ -58,6 +58,10 @@ end
 
 --[[ Assertions ]]--
 
+local function Raise(message)
+	error('|n|n' .. HIGHLIGHT_FONT_COLOR_CODE .. message .. FONT_COLOR_CODE_CLOSE, 3)
+end
+
 local function IsTable(value)
 	return type(value) == 'table'
 end
@@ -79,17 +83,23 @@ end
 function WoWTest.AreEqual(a, b)
 	local path, a, b = Difference(a, b)
 	if path then 
-		local message = strformat("Expected %s, got %s.", a, b)
+		local message = format('Expected %s|nGot %s', tostring(a), tostring(b))
 		if path ~= "" then
-			message = strformat("Tables differ at %s:|n  ", path) .. message
+			message = format('Tables differ at "%s"|n', path) .. message
 		end
 
-		error(message, 2)
+		Raise(message)
 	end
 end
 
 function WoWTest.Exists(value)
 	if not value then
-		error(strformat("Expected some value, got %s.", value), 2)
+		Raise(format('Expected some value, got %s', tostring(value)))
 	end
 end
+
+
+WoWTest.__index = getmetatable(WoWTest).__index
+WoWTest.__call = WoWTest.NewGroup
+WoWTest.groups = Groups
+setmetatable(WoWTest, WoWTest)

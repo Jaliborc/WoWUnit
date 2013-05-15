@@ -1,17 +1,17 @@
 ## Interface: 50200
 ## Title: |cffE5E5E5WoWTest|r
 ## Notes: 
-
 ## Author: Jaliborc (João Cardoso)
+
 ## X-License: GNU General Public License Version 3
 ## X-Category: Developer Tools
+## SavedVariables: WoWTest_SV
 ## Version: 1
 
 Interface\Frames.xml
-Interface\Display.lua
+Interface\Panel.lua
 
 Classes\Group.lua
 Classes\Test.lua
 
-API.lua
-Mock.lua
+WoWTest.lua

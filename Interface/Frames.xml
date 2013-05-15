@@ -1,13 +1,60 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
 ..\FrameXML\UI.xsd">
-	<Frame name="WoWTest" parent="UIParent" inherits="BasicFrameTemplateWithInset" hidden="true">
-		<Size x="280" y="400"/>
+	<Frame name="WoWTestPanelTemplate" inherits="BasicFrameTemplateWithInset" parent="UIParent" enableMouse="true" movable="true" virtual="true">
+		<Scripts>
+			<OnLoad>
+				self:RegisterForDrag('LeftButton')
+			</OnLoad>
+			<OnDragStart>
+				self:StartMoving()
+			</OnDragStart>
+			<OnDragStop>
+				self:StopMovingOrSizing()
+			</OnDragStop>
+
+			<OnShow>
+				self:GetScript('OnMouseDown')(self)
+			</OnShow>
+			<OnMouseDown>
+				self:SetFrameLevel(self:GetFrameLevel() + 5)
+			</OnMouseDown>
+		</Scripts>
+	</Frame>
+
+	<Frame name="WoWTestLogTemplate" inherits="WoWTestPanelTemplate" virtual="true">
+		<Size x="200" y="110"/>
 		<Anchors>
-			<Anchor point="CENTER" x="0" y="0"/>
+			<Anchor point="CENTER"/>
+		</Anchors>
+
+		<Layers>
+			<Layer level="OVERLAY">
+				<FontString parentKey="Content" inherits="GameFontDisableSmallLeft" nonspacewrap="true">
+					<Size x="174" y="0"/>
+					<Anchors>
+						<Anchor point="TOPLEFT" x="13" y="-30"/>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+	</Frame>
+
+	<Button name="WoWTestButtonTemplate" inherits="ReputationBarTemplate" virtual="true">
+		<Scripts>
+			<OnClick>
+				WoWTest:OnClick(self.entry)
+			</OnClick>
+		</Scripts>
+	</Button>
+
+	<Frame name="WoWTest" parent="UIParent" inherits="WoWTestPanelTemplate" enableMouse="true" movable="true" hidden="true">
+		<Size x="246" y="400"/>
+		<Anchors>
+			<Anchor point="RIGHT" x="-20" y="0"/>
 		</Anchors>
 		
         <Frames>
-			<ScrollFrame parentKey='Display' name="$parentDisplay" inherits="HybridScrollFrameTemplate">
+			<ScrollFrame parentKey='Scroll' name="$parentDisplay" inherits="HybridScrollFrameTemplate">
 				<Anchors>
 					<Anchor point="TOPLEFT" x="10" y="-27"/>
 					<Anchor point="BOTTOMRIGHT" x="-25" y="7"/>
@@ -24,22 +71,10 @@
 		</Frames>
 	</Frame>
 
-	<Button name="WoWTestButtonTemplate" inherits="ReputationBarTemplate" virtual="true">
-		<Scripts>
-			<OnLoad>
-				local name = self:GetName()
-
-				self.Text = _G[name .. 'FactionName']
-				self.Bar = _G[name .. 'ReputationBar']
-				self.Bar.Text = _G[name .. 'ReputationBarFactionStanding']
-				self.LFGBonusRepButton:Hide()
-			</OnLoad>
-		</Scripts>
-	</Button>
-
-	<Button name="WoWTestButton" parent="UIParent" inherits="UIPanelButtonTemplate">
+	<Button name="WoWTestToggle" parent="UIParent" inherits="GameTooltipTemplate" hidden="false" clampedToScreen="false">
+		<Size x="30" y="80"/>
 		<Anchors>
-			<Anchor point="BOTTOMRIGHT" x="-50" y="100"/>
+			<Anchor point="BOTTOMRIGHT" x="7" y="150"/>
 		</Anchors>
 
 		<Scripts>
