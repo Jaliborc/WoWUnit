@@ -82,5 +82,7 @@
 				WoWTest:SetShown(not WoWTest:IsShown())
 			</OnClick>
 		</Scripts>
+
+		<NormalFont style="GameFontHighlightHuge"/>
 	</Button>
 </Ui>

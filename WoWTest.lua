@@ -13,7 +13,7 @@ function WoWTest:NewGroup(name, ...)
 			self:AddToEvent(group, select(i, ...))
 		end
 	else
-		self:AddToEvent(group, 'PLAYER_ENTERING_WORLD')
+		self:AddToEvent(group, 'PLAYER_LOGIN')
 	end
 
 	return group

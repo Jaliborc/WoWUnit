@@ -11,21 +11,27 @@ local Colors = {
 function WoWTest:OnEvent(event)
 	self:RunTests(event)
 
-	local status = 0
+	local count, status = 0, 0
 	for _, group in pairs(self.groups) do
-		status = max(group:Status(), status)
+		local new = group:Status()
+		if new > status then
+			status = new
+			count = 1
+		elseif new == status then
+			count = count + 1
+		end
 	end
 
 	local color = Colors[status]
 	WoWTestToggle:SetBackdropColor(color.r, color.g, color.b)
-	WoWTest_SV = WoWTest_SV or {}
+	WoWTestToggle:SetText(count)
 end
 
 function WoWTest:OnShow()
 	HybridScrollFrame_CreateButtons(self.Scroll, 'WoWTestButtonTemplate', 2, -4, 'TOPLEFT', 'TOPLEFT', 0, -TOKEN_BUTTON_OFFSET)
 
-	self.TitleText:SetText('Unit Tests')
 	self:SortRegistry()
+	self.TitleText:SetText('Unit Tests')
 	self.Scroll:update()
 end
 
@@ -91,6 +97,7 @@ function WoWTest.Scroll:update()
 			_G[name .. 'ReputationBarFactionStanding']:Hide()
 			_G[name .. 'ReputationBar']:SetStatusBarColor(color.r, color.g, color.b)
 			_G[name .. 'ExpandOrCollapseButton']:SetNormalTexture(collapseTexture)
+			_G[name .. 'ExpandOrCollapseButton']:SetScript('OnClick', function() WoWTest:OnClick(entry) end)
 
 			button:SetSize(218, 20)
 			button.LFGBonusRepButton:Hide()
@@ -106,3 +113,4 @@ end
 
 WoWTest:SetScript('OnEvent', WoWTest.OnEvent)
 WoWTest:SetScript('OnShow', WoWTest.OnShow)
+WoWTest_SV = WoWTest_SV or {}
