@@ -92,14 +92,21 @@ function WoWTest.AreEqual(a, b)
 	end
 end
 
-function WoWTest.Exists(value)
+function WoWTest.IsTrue(value)
 	if not value then
 		Raise(format('Expected some value, got %s', tostring(value)))
+	end
+end
+
+function WoWTest.IsFalse(value)
+	if value then
+		Raise(format('Expected no value, got %s', tostring(value)))
 	end
 end
 
 
 WoWTest.__index = getmetatable(WoWTest).__index
 WoWTest.__call = WoWTest.NewGroup
+WoWTest.Exists = WoWTest.IsTrue
 WoWTest.groups = Groups
 setmetatable(WoWTest, WoWTest)
