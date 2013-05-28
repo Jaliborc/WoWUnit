@@ -1,5 +1,6 @@
 local Groups, Events = {}, {}
 local Replaces = {}
+local NIL = {}
 
 
 --[[ Registry ]]--
@@ -34,13 +35,23 @@ end
 
 --[[ Mocking ]]--
 
+local function Store(value)
+	return value == nil and NIL or value
+end
+
+local function Extract(value)
+	if value ~= NIL then
+		return value
+	end
+end
+
 function WoWTest.Replace(table, key, replace)
 	if not replace then
 		table, key, replace = _G, table, key
 	end
 	
 	Replaces[table] = Replaces[table] or {}
-	Replaces[table][key] = Replaces[table][key] or table[key]
+	Replaces[table][key] = Replaces[table][key] or Store(table[key])
 
 	table[key] = replace
 end
@@ -48,7 +59,7 @@ end
 function WoWTest.ClearReplaces()
 	for table, keys in pairs(Replaces) do
 		for key, original in pairs(keys) do
-			table[key] = original
+			table[key] = Extract(original)
 		end
 	end
 
