@@ -8,39 +8,29 @@ local Colors = {
 
 --[[ Events ]]--
 
-function WoWTest:OnEvent(event)
+function WoWUnit:OnEvent(event)
 	self:RunTests(event)
 
-	local count, status = 0, 0
-	for _, group in pairs(self.groups) do
-		local new = group:Status()
-		if new > status then
-			status = new
-			count = 1
-		elseif new == status then
-			count = count + 1
-		end
-	end
-
+	local status, count = Group.Status(self)
 	local color = Colors[status]
-	WoWTestToggle:SetBackdropColor(color.r, color.g, color.b)
-	WoWTestToggle:SetText(count)
+	WoWUnitToggle:SetBackdropColor(color.r, color.g, color.b)
+	WoWUnitToggle:SetText(count)
 end
 
-function WoWTest:OnShow()
-	HybridScrollFrame_CreateButtons(self.Scroll, 'WoWTestButtonTemplate', 2, -4, 'TOPLEFT', 'TOPLEFT', 0, -TOKEN_BUTTON_OFFSET)
+function WoWUnit:OnShow()
+	HybridScrollFrame_CreateButtons(self.Scroll, 'WoWUnitButtonTemplate', 2, -4, 'TOPLEFT', 'TOPLEFT', 0, -TOKEN_BUTTON_OFFSET)
 
 	self:SortRegistry()
 	self.TitleText:SetText('Unit Tests')
 	self.Scroll:update()
 end
 
-function WoWTest:OnClick(entry)
+function WoWUnit:OnClick(entry)
 	if entry.tests then
-		WoWTest_SV[entry.name] = not WoWTest_SV[entry.name] or nil
+		WoWUnit_SV[entry.name] = not WoWUnit_SV[entry.name] or nil
 		self.Scroll:update()
 	elseif #entry.errors > 0 then
-		local log = entry.log or CreateFrame('Frame', 'WoWTest' .. entry.name .. 'Log', UIParent, 'WoWTestLogTemplate')
+		local log = entry.log or CreateFrame('Frame', 'WoWUnit' .. entry.name .. 'Log', UIParent, 'WoWUnitLogTemplate')
 		log.Content:SetText(entry.errors[1])
 		log.TitleText:SetText(entry.name)
 		log:Show()
@@ -52,20 +42,20 @@ end
 
 --[[ Registry ]]--
 
-function WoWTest:SortRegistry()
-	sort(self.groups)
+function WoWUnit:SortRegistry()
+	sort(self.children)
 
-	for _, group in ipairs(self.groups) do
+	for _, group in ipairs(self.children) do
 		sort(group.tests)
 	end
 end
 
-function WoWTest:ListRegistry()
+function WoWUnit:ListRegistry()
 	local entries = {}
-	for _, group in pairs(WoWTest.groups) do
+	for _, group in pairs(WoWUnit.children) do
 		tinsert(entries, group)
 
-		if not WoWTest_SV[group.name] then
+		if not WoWUnit_SV[group.name] then
 			for _, test in pairs(group.tests) do
 				tinsert(entries, test)
 			end
@@ -78,9 +68,9 @@ end
 
 --[[ Update ]]--
 
-function WoWTest.Scroll:update()
-	local self = self or WoWTest.Scroll
-	local entries = WoWTest:ListRegistry()
+function WoWUnit.Scroll:update()
+	local self = self or WoWUnit.Scroll
+	local entries = WoWUnit:ListRegistry()
 	local off = HybridScrollFrame_GetOffset(self)
 	local overflow = #entries > #self.buttons
 
@@ -89,7 +79,7 @@ function WoWTest.Scroll:update()
 		if entry then
 			ReputationFrame_SetRowType(button, not entry.tests, entry.tests, true)
 
-			local collapseTexture = CollapseTexture:format(WoWTest_SV[entry.name] and 'Plus' or 'Minus')
+			local collapseTexture = CollapseTexture:format(WoWUnit_SV[entry.name] and 'Plus' or 'Minus')
 			local color = Colors[entry:Status()]
 			local name = button:GetName()
 
@@ -97,7 +87,7 @@ function WoWTest.Scroll:update()
 			_G[name .. 'ReputationBarFactionStanding']:Hide()
 			_G[name .. 'ReputationBar']:SetStatusBarColor(color.r, color.g, color.b)
 			_G[name .. 'ExpandOrCollapseButton']:SetNormalTexture(collapseTexture)
-			_G[name .. 'ExpandOrCollapseButton']:SetScript('OnClick', function() WoWTest:OnClick(entry) end)
+			_G[name .. 'ExpandOrCollapseButton']:SetScript('OnClick', function() WoWUnit:OnClick(entry) end)
 
 			button:SetSize(218, 20)
 			button.LFGBonusRepButton:Hide()
@@ -111,6 +101,6 @@ function WoWTest.Scroll:update()
 	self:SetPoint('BOTTOMRIGHT', overflow and -25 or 0, 7)
 end
 
-WoWTest:SetScript('OnEvent', WoWTest.OnEvent)
-WoWTest:SetScript('OnShow', WoWTest.OnShow)
-WoWTest_SV = WoWTest_SV or {}
+WoWUnit:SetScript('OnEvent', WoWUnit.OnEvent)
+WoWUnit:SetScript('OnShow', WoWUnit.OnShow)
+WoWUnit_SV = WoWUnit_SV or {}

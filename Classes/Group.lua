@@ -1,35 +1,41 @@
 local Group = {}
-WoWTest.Group = Group
+WoWUnit.Group = Group
 Group.__index = Group
 
 
 --[[ API ]]--
 
 function Group:New(name)
-	return setmetatable({name = name, tests = {}}, self)
+	return setmetatable({name = name, children = {}}, self)
 end
 
 function Group:Status()
-	local status = 0
-	for _, test in pairs(self.tests) do
-		status = max(test:Status(), status)
+	local status, count = 0, 0
+
+	for _, test in pairs(self.children) do
+		local s, c = test:Status()
+		if s > status then
+			status, count = s, c
+		elseif s == status then
+			count = count + c
+		end
 	end
 
-	return status
+	return status, count
 end
 
 
 --[[ Operators ]]--
 
 function Group:__call()
-	for _, test in pairs(self.tests) do
+	for _, test in pairs(self.children) do
 		test()
 	end
 end
 
 function Group:__newindex(key, value)
 	if type(value) == 'function' then
-		tinsert(self.tests, WoWTest.UnitTest:New(key, value))
+		tinsert(self.children, WoWUnit.Test:New(key, value))
 	end
 end
 
