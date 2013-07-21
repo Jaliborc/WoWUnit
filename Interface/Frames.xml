@@ -1,6 +1,6 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
 ..\FrameXML\UI.xsd">
-	<Frame name="WoWTestPanelTemplate" inherits="BasicFrameTemplateWithInset" parent="UIParent" enableMouse="true" movable="true" virtual="true">
+	<Frame name="WoWUnitPanelTemplate" inherits="BasicFrameTemplateWithInset" parent="UIParent" enableMouse="true" movable="true" virtual="true">
 		<Scripts>
 			<OnLoad>
 				self:RegisterForDrag('LeftButton')
@@ -21,7 +21,7 @@
 		</Scripts>
 	</Frame>
 
-	<Frame name="WoWTestLogTemplate" inherits="WoWTestPanelTemplate" virtual="true">
+	<Frame name="WoWUnitLogTemplate" inherits="WoWUnitPanelTemplate" virtual="true">
 		<Size x="200" y="110"/>
 		<Anchors>
 			<Anchor point="CENTER"/>
@@ -39,15 +39,15 @@
 		</Layers>
 	</Frame>
 
-	<Button name="WoWTestButtonTemplate" inherits="ReputationBarTemplate" virtual="true">
+	<Button name="WoWUnitButtonTemplate" inherits="ReputationBarTemplate" virtual="true">
 		<Scripts>
 			<OnClick>
-				WoWTest:OnClick(self.entry)
+				WoWUnit:OnClick(self.entry)
 			</OnClick>
 		</Scripts>
 	</Button>
 
-	<Frame name="WoWTest" parent="UIParent" inherits="WoWTestPanelTemplate" enableMouse="true" movable="true" hidden="true">
+	<Frame name="WoWUnit" parent="UIParent" inherits="WoWUnitPanelTemplate" enableMouse="true" movable="true" hidden="true">
 		<Size x="246" y="400"/>
 		<Anchors>
 			<Anchor point="RIGHT" x="-20" y="0"/>
@@ -71,7 +71,7 @@
 		</Frames>
 	</Frame>
 
-	<Button name="WoWTestToggle" parent="UIParent" inherits="GameTooltipTemplate" hidden="false" clampedToScreen="false">
+	<Button name="WoWUnitToggle" parent="UIParent" inherits="GameTooltipTemplate" hidden="false" clampedToScreen="false">
 		<Size x="30" y="80"/>
 		<Anchors>
 			<Anchor point="BOTTOMRIGHT" x="7" y="150"/>
@@ -79,7 +79,7 @@
 
 		<Scripts>
 			<OnClick>
-				WoWTest:SetShown(not WoWTest:IsShown())
+				WoWUnit:SetShown(not WoWUnit:IsShown())
 			</OnClick>
 		</Scripts>
 

@@ -5,7 +5,7 @@ local NIL = {}
 
 --[[ Registry ]]--
 
-function WoWTest:NewGroup(name, ...)
+function WoWUnit:NewGroup(name, ...)
 	local group = self.Group:New(name)
 	tinsert(Groups, group)
 
@@ -20,13 +20,13 @@ function WoWTest:NewGroup(name, ...)
 	return group
 end
 
-function WoWTest:AddToEvent(group, event)
+function WoWUnit:AddToEvent(group, event)
 	self:RegisterEvent(event)
 	Events[event] = Events[event] or {}
 	tinsert(Events[event], group)
 end
 
-function WoWTest:RunTests(event)
+function WoWUnit:RunTests(event)
 	for _, group in ipairs(Events[event]) do
 		group()
 	end
@@ -45,7 +45,7 @@ local function Extract(value)
 	end
 end
 
-function WoWTest.Replace(table, key, replace)
+function WoWUnit.Replace(table, key, replace)
 	if not replace then
 		table, key, replace = _G, table, key
 	end
@@ -56,7 +56,7 @@ function WoWTest.Replace(table, key, replace)
 	table[key] = replace
 end
 
-function WoWTest.ClearReplaces()
+function WoWUnit.ClearReplaces()
 	for table, keys in pairs(Replaces) do
 		for key, original in pairs(keys) do
 			table[key] = Extract(original)
@@ -91,33 +91,33 @@ local function Difference(a, b)
 	end
 end
 
-function WoWTest.AreEqual(a, b)
+function WoWUnit.AreEqual(a, b)
 	local path, a, b = Difference(a, b)
 	if path then 
 		local message = format('Expected %s|nGot %s', tostring(a), tostring(b))
 		if path ~= "" then
-			message = format('Tables differ at "%s"|n', path) .. message
+			message = format('Tables differ at "%s"|n', path:sub(2)) .. message
 		end
 
 		Raise(message)
 	end
 end
 
-function WoWTest.IsTrue(value)
+function WoWUnit.IsTrue(value)
 	if not value then
 		Raise(format('Expected some value, got %s', tostring(value)))
 	end
 end
 
-function WoWTest.IsFalse(value)
+function WoWUnit.IsFalse(value)
 	if value then
 		Raise(format('Expected no value, got %s', tostring(value)))
 	end
 end
 
 
-WoWTest.__index = getmetatable(WoWTest).__index
-WoWTest.__call = WoWTest.NewGroup
-WoWTest.Exists = WoWTest.IsTrue
-WoWTest.groups = Groups
-setmetatable(WoWTest, WoWTest)
+WoWUnit.__index = getmetatable(WoWUnit).__index
+WoWUnit.__call = WoWUnit.NewGroup
+WoWUnit.Exists = WoWUnit.IsTrue
+WoWUnit.children = Groups
+setmetatable(WoWUnit, WoWUnit)

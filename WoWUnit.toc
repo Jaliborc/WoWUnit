@@ -1,11 +1,11 @@
 ## Interface: 50200
-## Title: |cffE5E5E5WoWTest|r
-## Notes: 
+## Title: |cffE5E5E5WoWUnit|r
+## Notes: Unit testing toolset for World of Warcraft
 ## Author: Jaliborc (João Cardoso)
 
 ## X-License: GNU General Public License Version 3
 ## X-Category: Developer Tools
-## SavedVariables: WoWTest_SV
+## SavedVariables: WoWUnit_SV
 ## Version: 1
 
 Interface\Frames.xml
@@ -14,4 +14,4 @@ Interface\Panel.lua
 Classes\Group.lua
 Classes\Test.lua
 
-WoWTest.lua
+WoWUnit.lua

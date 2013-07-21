@@ -1,5 +1,5 @@
 local Test = {}
-WoWTest.UnitTest = Test
+WoWUnit.Test = Test
 Test.__index = Test
 
 
@@ -20,9 +20,9 @@ function Test:Status()
 	local pass = self.numOk > 0 and 1 or 0
 
 	if #self.errors > 0 then
-		return 4 - pass
+		return 4 - pass, 1
 	else
-		return 1 + pass
+		return 1 + pass, 1
 	end
 end
 
@@ -34,10 +34,10 @@ function Test:__call()
 	if success then
 		self.numOk = self.numOk + 1
 	else
-		tinsert(self.errors, message)
+		tinsert(self.errors, 1, message)
 	end
 
-	WoWTest.ClearReplaces()
+	WoWUnit.ClearReplaces()
 end
 
 function Test:__lt(other)
