@@ -11,6 +11,10 @@ local Colors = {
 function WoWUnit:OnEvent(event)
 	self:RunTests(event)
 
+	if self:IsShown() then
+		self.Scroll:update()
+	end
+
 	local status, count = self.Group.Status(self)
 	local color = Colors[status]
 	WoWUnitToggle:SetBackdropColor(color.r, color.g, color.b)
