@@ -48,7 +48,7 @@
 	</Button>
 
 	<Frame name="WoWUnit" parent="UIParent" inherits="WoWUnitPanelTemplate" enableMouse="true" movable="true" hidden="true">
-		<Size x="246" y="400"/>
+		<Size x="266" y="400"/>
 		<Anchors>
 			<Anchor point="RIGHT" x="-20" y="0"/>
 		</Anchors>

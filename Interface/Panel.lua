@@ -11,7 +11,7 @@ local Colors = {
 function WoWUnit:OnEvent(event)
 	self:RunTests(event)
 
-	local status, count = Group.Status(self)
+	local status, count = self.Group.Status(self)
 	local color = Colors[status]
 	WoWUnitToggle:SetBackdropColor(color.r, color.g, color.b)
 	WoWUnitToggle:SetText(count)
@@ -26,7 +26,7 @@ function WoWUnit:OnShow()
 end
 
 function WoWUnit:OnClick(entry)
-	if entry.tests then
+	if entry.children then
 		WoWUnit_SV[entry.name] = not WoWUnit_SV[entry.name] or nil
 		self.Scroll:update()
 	elseif #entry.errors > 0 then
@@ -46,7 +46,7 @@ function WoWUnit:SortRegistry()
 	sort(self.children)
 
 	for _, group in ipairs(self.children) do
-		sort(group.tests)
+		sort(group.children)
 	end
 end
 
@@ -56,7 +56,7 @@ function WoWUnit:ListRegistry()
 		tinsert(entries, group)
 
 		if not WoWUnit_SV[group.name] then
-			for _, test in pairs(group.tests) do
+			for _, test in pairs(group.children) do
 				tinsert(entries, test)
 			end
 		end
@@ -77,7 +77,7 @@ function WoWUnit.Scroll:update()
 	for i, button in ipairs(self.buttons) do
 		local entry = entries[i + off]
 		if entry then
-			ReputationFrame_SetRowType(button, not entry.tests, entry.tests, true)
+			ReputationFrame_SetRowType(button, not entry.children, entry.children, true)
 
 			local collapseTexture = CollapseTexture:format(WoWUnit_SV[entry.name] and 'Plus' or 'Minus')
 			local color = Colors[entry:Status()]
@@ -89,7 +89,7 @@ function WoWUnit.Scroll:update()
 			_G[name .. 'ExpandOrCollapseButton']:SetNormalTexture(collapseTexture)
 			_G[name .. 'ExpandOrCollapseButton']:SetScript('OnClick', function() WoWUnit:OnClick(entry) end)
 
-			button:SetSize(218, 20)
+			button:SetSize(238, 20)
 			button.LFGBonusRepButton:Hide()
 		end
 

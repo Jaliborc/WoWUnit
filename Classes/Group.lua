@@ -10,7 +10,7 @@ function Group:New(name)
 end
 
 function Group:Status()
-	local status, count = 0, 0
+	local status, count = 1, 0
 
 	for _, test in pairs(self.children) do
 		local s, c = test:Status()
