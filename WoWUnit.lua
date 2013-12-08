@@ -46,7 +46,7 @@ local function Extract(value)
 end
 
 function WoWUnit.Replace(table, key, replace)
-	if not replace then
+	if replace == nil then
 		table, key, replace = _G, table, key
 	end
 	
