@@ -1,4 +1,4 @@
-## Interface: 50200
+## Interface: 60100
 ## Title: |cffE5E5E5WoWUnit|r
 ## Notes: Unit testing toolset for World of Warcraft
 ## Author: Jaliborc (João Cardoso)

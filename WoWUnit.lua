@@ -1,4 +1,5 @@
 local Groups, Events = {}, {}
+local Enabled = true
 local Replaces = {}
 local NIL = {}
 
@@ -67,6 +68,21 @@ function WoWUnit.ClearReplaces()
 end
 
 
+--[[ Control ]]--
+
+function WoWUnit.Enable()
+	Enabled = true
+end
+
+function WoWUnit.Disable()
+	Enabled = false
+end
+
+function WoWUnit.Enabled()
+	return Enabled
+end
+
+
 --[[ Assertions ]]--
 
 local function Raise(message)
@@ -83,6 +99,12 @@ local function Difference(a, b)
 			local path, a, b = Difference(value, b[key])
 			if path then
 				return "." .. key .. path, a, b
+			end
+		end
+
+		for key, value in pairs(b) do
+			if a[key] == nil then
+				return "." .. key, nil, value
 			end
 		end
 		

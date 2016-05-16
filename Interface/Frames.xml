@@ -22,7 +22,7 @@
 	</Frame>
 
 	<Frame name="WoWUnitLogTemplate" inherits="WoWUnitPanelTemplate" virtual="true">
-		<Size x="200" y="110"/>
+		<Size x="200" y="150"/>
 		<Anchors>
 			<Anchor point="CENTER"/>
 		</Anchors>

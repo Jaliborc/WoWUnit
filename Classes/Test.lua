@@ -17,9 +17,9 @@ function Test:New(name, func)
 end
 
 function Test:Status()
-	local pass = self.numOk > 0 and 1 or 0
+	local pass = self.numOk > 0 and self.enabled and 1 or 0
 
-	if #self.errors > 0 then
+	if #self.errors > 0 and self.enabled then
 		return 4 - pass, 1
 	else
 		return 1 + pass, 1
@@ -33,11 +33,14 @@ function Test:__call()
 	local success, message = pcall(self.func)
 	if success then
 		self.numOk = self.numOk + 1
+		self.enabled = 1
 	else
 		tinsert(self.errors, 1, message)
+		self.enabled = WoWUnit.Enabled()
 	end
 
 	WoWUnit.ClearReplaces()
+	WoWUnit.Enable()
 end
 
 function Test:__lt(other)
