@@ -32,7 +32,7 @@ We can make the following tests:
     end
 
 
-## Full API
+## Test API
 A unit test group is created by calling `WoWUnit(name, event1, event2, ...)` or `WoWUnit:NewGroup(name, event1, event2, ...)`.
 Unit tests in the group are called at startup and whenever the game events listed occur.
 
