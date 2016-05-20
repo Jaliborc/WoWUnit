@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Wowunit : A unit testing framework for World of Warcraft">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Wowunit</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/Jaliborc/WoWUnit">View on GitHub</a>
+
+          <h1 id="project_title">Wowunit</h1>
+          <h2 id="project_tagline">A unit testing framework for World of Warcraft</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/Jaliborc/WoWUnit/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/Jaliborc/WoWUnit/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <p>WoWUnit allows you to easly write unit tests for your World of Warcraft addons and provides an interface to monitor them.
+Unit tests can be run at game events. Also provides methods for temporarly mocking variables.</p>
+
+<blockquote>
+<p><img src="https://github.com/jaliborc/WoWUnit/wiki/panels3.jpg" alt="Panels"></p>
+</blockquote>
+
+<h2>
+<a id="example" class="anchor" href="#example" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example</h2>
+
+<p>Let's assume we define the following functions in our addon:</p>
+
+<pre><code>Numbers = function() return 1, 2, 3 end
+Realm = function() GetRealmName() .. '!' end
+</code></pre>
+
+<p>We can make the following tests:</p>
+
+<pre><code>local AreEqual, Exists, Replace = WoWUnit.AreEqual, WoWUnit.Exists, WoWUnit.Replace
+local Tests = WoWUnit('MyAddonName', 'PLAYER_UPDATE', 'MONEY_UPDATE')
+    -- tests will be called at startup, PLAYER_UPDATE and MONEY_UPDATE events
+
+function Tests:PassingTest()
+    AreEqual({1,2,3}, {Numbers()})
+    Exists(true)
+end
+
+function Tests:FaillingTest()
+    AreEqual('Apple', 'Pie')
+    Exists(false)
+end
+
+function Tests:MockingTest()
+    Replace('GetRealmName', function() return 'Horseshoe' end)
+    AreEqual('Horseshoe!', Realm())
+end
+</code></pre>
+
+<h2>
+<a id="test-api" class="anchor" href="#test-api" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Test API</h2>
+
+<p>A unit test group is created by calling <code>WoWUnit(name, event1, event2, ...)</code> or <code>WoWUnit:NewGroup(name, event1, event2, ...)</code>.
+Unit tests in the group are called at startup and whenever the game events listed occur.</p>
+
+<p>A unit test is defined by indexing a function in the group. While the test is running, the following methods can be used:</p>
+
+<table>
+<thead>
+<tr>
+<th align="left">Name</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">AreEqual(a, b)</td>
+<td align="left">Checks wether <code>a</code> and <code>b</code> match. Throws a fail status if not.</td>
+</tr>
+<tr>
+<td align="left">IsTrue(value)</td>
+<td align="left">Checks wether <code>value</code> passes an if statement. Throws a fail status if not.</td>
+</tr>
+<tr>
+<td align="left">Exists(value)</td>
+<td align="left">Same as above.</td>
+</tr>
+<tr>
+<td align="left">IsFalse(value)</td>
+<td align="left">Checks wether <code>value</code> fails an if statement. Throws a fail status if not.</td>
+</tr>
+<tr>
+<td align="left">Replace([table,] name, replace)</td>
+<td align="left">Temporarly replaces <code>table[name]</code> or global <code>name</code> with <code>replace</code> while the unit test is running.</td>
+</tr>
+<tr>
+<td align="left">ClearReplaces()</td>
+<td align="left">Resets all replacements done so far.</td>
+</tr>
+<tr>
+<td align="left">Enable()</td>
+<td align="left">Enables the current unit test (enabled by default).</td>
+</tr>
+<tr>
+<td align="left">Disable()</td>
+<td align="left">Disables the current unit test.</td>
+</tr>
+</tbody>
+</table>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Wowunit maintained by <a href="https://github.com/Jaliborc">Jaliborc</a></p>
+        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
