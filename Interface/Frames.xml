@@ -52,7 +52,7 @@
 		<Anchors>
 			<Anchor point="RIGHT" x="-20" y="0"/>
 		</Anchors>
-		
+
         <Frames>
 			<ScrollFrame parentKey='Scroll' name="$parentDisplay" inherits="HybridScrollFrameTemplate">
 				<Anchors>
@@ -71,11 +71,23 @@
 		</Frames>
 	</Frame>
 
-	<Button name="WoWUnitToggle" parent="UIParent" inherits="GameTooltipTemplate" hidden="false" clampedToScreen="false">
+	<Button name="WoWUnitToggle" parent="UIParent" hidden="false" clampedToScreen="false">
 		<Size x="30" y="80"/>
 		<Anchors>
 			<Anchor point="BOTTOMRIGHT" x="7" y="150"/>
 		</Anchors>
+		
+		<Backdrop bgFile="Interface\Tooltips\UI-Tooltip-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
+			<EdgeSize>
+				<AbsValue val="16"/>
+			</EdgeSize>
+			<TileSize>
+				<AbsValue val="16"/>
+			</TileSize>
+			<BackgroundInsets>
+				<AbsInset left="4" right="4" top="4" bottom="4"/>
+			</BackgroundInsets>
+		</Backdrop>
 
 		<Scripts>
 			<OnClick>

@@ -9,16 +9,17 @@ local Colors = {
 --[[ Events ]]--
 
 function WoWUnit:OnEvent(event)
-	self:RunTests(event)
+	C_Timer.NewTicker(0.1, function()
+		self:RunTests(event)
+		if self:IsShown() then
+			self.Scroll:update()
+		end
 
-	if self:IsShown() then
-		self.Scroll:update()
-	end
-
-	local status, count = self.Group.Status(self)
-	local color = Colors[status]
-	WoWUnitToggle:SetBackdropColor(color.r, color.g, color.b)
-	WoWUnitToggle:SetText(count)
+		local status, count = self.Group.Status(self)
+		local color = Colors[status]
+		WoWUnitToggle:SetBackdropColor(color.r, color.g, color.b)
+		WoWUnitToggle:SetText(count)
+	end, 5)
 end
 
 function WoWUnit:OnShow()
