@@ -1,5 +1,6 @@
-local CollapseTexture = 'Interface/Buttons/UI-%sButton-Up'
-local Colors = {
+local NUM_VISIBLE_BUTTONS = 16
+local COLLAPSE_TEXTURE = 'Interface/Buttons/UI-%sButton-Up'
+local COLORS = {
 	GRAY_FONT_COLOR,
 	GREEN_FONT_COLOR,
 	YELLOW_FONT_COLOR,
@@ -16,14 +17,14 @@ function WoWUnit:OnEvent(event)
 		end
 
 		local status, count = self.Group.Status(self)
-		local color = Colors[status]
+		local color = COLORS[status]
 		WoWUnitToggle:SetBackdropColor(color.r, color.g, color.b)
 		WoWUnitToggle:SetText(count)
 	end, 5)
 end
 
 function WoWUnit:OnShow()
-	HybridScrollFrame_CreateButtons(self.Scroll, 'WoWUnitButtonTemplate', 2, -4, 'TOPLEFT', 'TOPLEFT', 0, -TOKEN_BUTTON_OFFSET)
+	HybridScrollFrame_CreateButtons(self.Scroll, 'WoWUnitButtonTemplate', 2, -4, 'TOPLEFT', 'TOPLEFT', 0, -3)
 
 	self:SortRegistry()
 	self.TitleText:SetText('Unit Tests')
@@ -75,34 +76,51 @@ end
 
 function WoWUnit.Scroll:update()
 	local self = self or WoWUnit.Scroll
-	local entries = WoWUnit:ListRegistry()
 	local off = HybridScrollFrame_GetOffset(self)
-	local overflow = #entries > #self.buttons
+	local entries = WoWUnit:ListRegistry()
+	local overflow = #entries > NUM_VISIBLE_BUTTONS
 
 	for i, button in ipairs(self.buttons) do
 		local entry = entries[i + off]
 		if entry then
-			ReputationFrame_SetRowType(button, not entry.children, entry.children, true)
+			local isHeader = entry.children
+			local collapseTexture = COLLAPSE_TEXTURE:format(WoWUnit_SV[entry.name] and 'Plus' or 'Minus')
+			local color = COLORS[entry:Status()]
+			local height = isHeader and 15 or 21
 
-			local collapseTexture = CollapseTexture:format(WoWUnit_SV[entry.name] and 'Plus' or 'Minus')
-			local color = Colors[entry:Status()]
-			local name = button:GetName()
+			button.Name:SetText(entry.name)
+			button.Name:SetFontObject(isHeader and GameFontNormalLeft or GameFontHighlightSmall)
+			button.Name:SetPoint('LEFT', isHeader and button.CollapseButton or button, isHeader and 'RIGHT' or 'LEFT', 10, 0)
+			button.Bar:SetStatusBarColor(color.r, color.g, color.b)
+			button.CollapseButton:SetNormalTexture(collapseTexture)
+			button.CollapseButton:SetShown(isHeader)
+			button.Background:SetShown(not isHeader)
+			button.Bar.Right:SetHeight(height)
+			button.Bar.Left:SetHeight(height)
 
-			_G[name .. 'FactionName']:SetText(entry.name)
-			_G[name .. 'ReputationBarFactionStanding']:Hide()
-			_G[name .. 'ReputationBar']:SetStatusBarColor(color.r, color.g, color.b)
-			_G[name .. 'ExpandOrCollapseButton']:SetNormalTexture(collapseTexture)
-			_G[name .. 'ExpandOrCollapseButton']:SetScript('OnClick', function() WoWUnit:OnClick(entry) end)
-
-			button:SetSize(238, 20)
-			button.LFGBonusRepButton:Hide()
+			if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
+				button.Background:SetTexCoord(0, 0.48, 0, 0.328125)
+				button.Bar.Right:SetTexCoord(0, 0.0625, 0.34375, 0.671875)
+				button.Bar.Left:SetTexCoord(0.48, 1, 0, 0.328125)
+				button.Bar.Right:SetWidth(10)
+				button.Bar.Left:SetWidth(92)
+			else
+				if isHeader then
+					button.Bar.Right:SetTexCoord(0, 0.15234375, 0.390625, 0.625)
+					button.Bar.Left:SetTexCoord(0.765625, 1, 0.46875, 0.28125)
+				else
+					button.Bar.Right:SetTexCoord(0, 0.1640625, 0.34375, 0.671875)
+					button.Bar.Left:SetTexCoord(0.7578125, 1, 0, 0.328125)
+				end
+			end
 		end
 
+		button:SetWidth(overflow and 222 or 238)
 		button:SetShown(entry)
 		button.entry = entry
 	end
 
-	HybridScrollFrame_Update(self, #entries * 20 + 2, #self.buttons * 18)
+	HybridScrollFrame_Update(self, #entries * 23 + 3, NUM_VISIBLE_BUTTONS * 20)
 	self:SetPoint('BOTTOMRIGHT', overflow and -25 or 0, 7)
 end
 

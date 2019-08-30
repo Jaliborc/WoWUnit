@@ -39,11 +39,114 @@
 		</Layers>
 	</Frame>
 
-	<Button name="WoWUnitButtonTemplate" inherits="ReputationBarTemplate" virtual="true">
+	<Button name="WoWUnitButtonTemplate" virtual="true">
+		<Size x="238" y="20"/>
+		<Layers>
+			<Layer level="ARTWORK">
+				<Texture parentKey="Background" file="Interface\PaperDollInfoFrame\UI-Character-ReputationBar">
+					<Size x="0" y="21"/>
+					<Anchors>
+						<Anchor point="LEFT">
+							<Offset x="0" y="0"/>
+						</Anchor>
+					</Anchors>
+				</Texture>
+				<TexCoords left="0.0" right="0.7578125" top="0.0" bottom="0.328125"/>
+			</Layer>
+			<Layer level="OVERLAY">
+				<FontString parentKey="Name" inherits="GameFontHighlightSmall" justifyH="LEFT">
+					<Size x="135" y="10"/>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Button parentKey="CollapseButton">
+				<Size x="13" y="13"/>
+				<Anchors>
+					<Anchor point="LEFT" x="3" y="0"/>
+				</Anchors>
+				<HitRectInsets>
+					<AbsInset left="1" right="-4" top="-2" bottom="-2"/>
+				</HitRectInsets>
+				<Scripts>
+					<OnClick>
+						WoWUnit:OnClick(self:GetParent().entry)
+					</OnClick>
+				</Scripts>
+				<NormalTexture file="Interface\Buttons\UI-MinusButton-UP">
+					<Size x="16" y="16"/>
+					<Anchors>
+						<Anchor point="LEFT" x="3" y="0"/>
+					</Anchors>
+				</NormalTexture>
+				<HighlightTexture name="$parentHighlight" file="Interface\Buttons\UI-PlusButton-Hilight" alphaMode="ADD">
+					<Size x="16" y="16"/>
+					<Anchors>
+						<Anchor point="LEFT" x="3" y="0"/>
+					</Anchors>
+				</HighlightTexture>
+			</Button>
+			<StatusBar parentKey="Bar" drawLayer="BACKGROUND" minValue="0" maxValue="1" defaultValue="1">
+				<Size x="99" y="13"/>
+				<Anchors>
+					<Anchor point="RIGHT" x="0" y="0"/>
+				</Anchors>
+				<Layers>
+					<Layer level="ARTWORK">
+						<Texture parentKey="Left" file="Interface\PaperDollInfoFrame\UI-Character-ReputationBar">
+							<Size x="60" y="21"/>
+							<Anchors>
+								<Anchor point="LEFT" x="0" y="0"/>
+							</Anchors>
+						</Texture>
+						<Texture parentKey="Right" file="Interface\PaperDollInfoFrame\UI-Character-ReputationBar">
+							<Size x="39" y="21"/>
+							<Anchors>
+								<Anchor point="LEFT" relativeKey="$parent.Left" relativePoint="RIGHT" x="0" y="0"/>
+							</Anchors>
+						</Texture>
+					</Layer>
+					<Layer level="OVERLAY">
+						<Texture parentKey="Highlight2" file="Interface\PaperDollInfoFrame\UI-Character-ReputationBar-Highlight" alphaMode="ADD" hidden="true">
+							<Size x="17" y="28"/>
+							<Anchors>
+								<Anchor point="RIGHT">
+									<Offset x="4" y="0"/>
+								</Anchor>
+							</Anchors>
+							<TexCoords left="0" right="0.06640625" top="0.4375" bottom="0.875"/>
+						</Texture>
+						<Texture parentKey="Highlight1" file="Interface\PaperDollInfoFrame\UI-Character-ReputationBar-Highlight" alphaMode="ADD" hidden="true">
+							<Size x="0" y="28"/>
+							<Anchors>
+								<Anchor point="RIGHT" relativeKey="$parent.Highlight2" relativePoint="LEFT"/>
+							</Anchors>
+							<TexCoords left="0" right="1" top="0" bottom="0.4375"/>
+						</Texture>
+					</Layer>
+				</Layers>
+				<BarTexture file="Interface\PaperDollInfoFrame\UI-Character-Skills-Bar"/>
+				<BarColor r=".25" g=".25" b=".75"/>
+			</StatusBar>
+		</Frames>
 		<Scripts>
+			<OnLoad>
+				self.Bar.Highlight1:SetPoint('TOPLEFT', self, 'TOPLEFT',-2, 4)
+				self.Bar.Highlight1:SetPoint('BOTTOMRIGHT', self, 'BOTTOMRIGHT',-10, -4)
+				self.Background:SetPoint('TOPRIGHT', self.Bar.Left, 'TOPLEFT', 0, 0)
+				self.Name:SetPoint('RIGHT', self.Bar, 'LEFT', -3, 0)
+			</OnLoad>
 			<OnClick>
 				WoWUnit:OnClick(self.entry)
 			</OnClick>
+			<OnEnter>
+				self.Bar.Highlight1:Show()
+				self.Bar.Highlight2:Show()
+			</OnEnter>
+			<OnLeave>
+				self.Bar.Highlight1:Hide()
+				self.Bar.Highlight2:Hide()
+			</OnLeave>
 		</Scripts>
 	</Button>
 
@@ -52,15 +155,14 @@
 		<Anchors>
 			<Anchor point="RIGHT" x="-20" y="0"/>
 		</Anchors>
-
-        <Frames>
-			<ScrollFrame parentKey='Scroll' name="$parentDisplay" inherits="HybridScrollFrameTemplate">
+		<Frames>
+			<ScrollFrame parentKey='Scroll' name="$parentScroll" inherits="HybridScrollFrameTemplate">
 				<Anchors>
 					<Anchor point="TOPLEFT" x="10" y="-27"/>
 					<Anchor point="BOTTOMRIGHT" x="-25" y="7"/>
 				</Anchors>
 				<Frames>
-					<Slider name="$parentBar" inherits="HybridScrollBarTemplate">
+					<Slider parentKey='Bar' name="$parentBar" inherits="HybridScrollBarTemplate">
 						<Anchors>
 							<Anchor point="TOPLEFT" relativePoint="TOPRIGHT" x="-1" y="-12"/>
 							<Anchor point="BOTTOMLEFT" relativePoint="BOTTOMRIGHT" x="-1" y="11"/>
@@ -76,7 +178,7 @@
 		<Anchors>
 			<Anchor point="BOTTOMRIGHT" x="7" y="150"/>
 		</Anchors>
-		
+
 		<Backdrop bgFile="Interface\Tooltips\UI-Tooltip-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
 			<EdgeSize>
 				<AbsValue val="16"/>

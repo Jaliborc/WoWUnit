@@ -1,6 +1,5 @@
 # WoWUnit
-WoWUnit allows you to easly write unit tests for your World of Warcraft addons and provides an interface to monitor them.
-Unit tests can be run at game events. Also provides methods for temporarly mocking variables.
+WoWUnit allows you to easily write unit tests for your World of Warcraft addons and provides an interface to monitor them. Unit tests can be run at game events. Also provides methods for temporarily mocking variables.
 
 ![Panels](https://github.com/jaliborc/WoWUnit/wiki/panels3.jpg)
 
@@ -9,7 +8,7 @@ Let's assume we define the following functions in our addon:
 
     Numbers = function() return 1, 2, 3 end
     Realm = function() GetRealmName() .. '!' end
-  
+
 We can make the following tests:
 
     local AreEqual, Exists, Replace = WoWUnit.AreEqual, WoWUnit.Exists, WoWUnit.Replace

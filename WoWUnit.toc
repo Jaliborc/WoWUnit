@@ -1,4 +1,4 @@
-## Interface: 80000
+## Interface: 80200
 ## Title: |cffE5E5E5WoWUnit|r
 ## Notes: Unit testing toolset for World of Warcraft
 ## Author: Jaliborc (João Cardoso)
@@ -6,7 +6,7 @@
 ## X-License: GNU General Public License Version 3
 ## X-Category: Developer Tools
 ## SavedVariables: WoWUnit_SV
-## Version: 1
+## Version: 8.2.1
 
 Interface\Frames.xml
 Interface\Panel.lua
