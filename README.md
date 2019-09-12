@@ -1,7 +1,7 @@
 
 ![Panels](http://jaliborc.com/images/addons/large/wowunit.jpg)
 
-# WoWUnit :passport_control:
+# WoWUnit :microscope:
 
 [![Install](http://img.shields.io/badge/install-twitch-blueviolet)](https://www.curseforge.com/wow/addons/wowunit/files)
 [![Patreon](http://img.shields.io/badge/donate-patreon-orange)](https://www.patreon.com/jaliborc)
