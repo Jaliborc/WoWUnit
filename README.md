@@ -1,7 +1,12 @@
-# WoWUnit
-WoWUnit allows you to easily write unit tests for your World of Warcraft addons and provides an interface to monitor them. Unit tests can be run at game events. Also provides methods for temporarily mocking variables.
 
 ![Panels](http://jaliborc.com/images/addons/large/wowunit.jpg)
+
+# WoWUnit :microscope:
+
+[![Install](http://img.shields.io/badge/install-twitch-blueviolet)](https://www.curseforge.com/wow/addons/wowunit/files)
+[![Patreon](http://img.shields.io/badge/donate-patreon-orange)](https://www.patreon.com/jaliborc)
+
+WoWUnit allows you to easily write unit tests for your World of Warcraft addons and provides an interface to monitor them. Unit tests can be run at game events. Also provides methods for temporarily mocking variables.
 
 ## Example
 Let's assume we define the following functions in our addon:
