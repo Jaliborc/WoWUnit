@@ -1,24 +1,28 @@
-local Groups, Events = {}, {}
-local Enabled = true
-local Replaces = {}
+local Enabled, Events, Replaces = true, {}, {}
 local NIL = {}
 
 
 --[[ Registry ]]--
 
 function WoWUnit:NewGroup(name, ...)
-	local group = self.Group:New(name)
-	tinsert(Groups, group)
+	if not self:HasGroup(name) then
+		local group = self.Group:New(name)
+		tinsert(self.children, group)
 
-	if ... then
-		for i = 1, select('#', ...) do
-			self:AddToEvent(group, select(i, ...))
+		if ... then
+			for i = 1, select('#', ...) do
+				self:AddToEvent(group, select(i, ...))
+			end
+		else
+			self:AddToEvent(group, 'PLAYER_LOGIN')
 		end
-	else
-		self:AddToEvent(group, 'PLAYER_LOGIN')
-	end
 
-	return group
+		return group
+	end
+end
+
+function WoWUnit:HasGroup(name)
+	return FindInTableIf(self.children, function(g) return g.name == name end)
 end
 
 function WoWUnit:AddToEvent(group, event)
@@ -141,5 +145,5 @@ end
 WoWUnit.__index = getmetatable(WoWUnit).__index
 WoWUnit.__call = WoWUnit.NewGroup
 WoWUnit.Exists = WoWUnit.IsTrue
-WoWUnit.children = Groups
+WoWUnit.children = {}
 setmetatable(WoWUnit, WoWUnit)
