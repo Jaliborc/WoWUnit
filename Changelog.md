@@ -1,3 +1,6 @@
+#### 9.0.0
+* Now compatible with Shadowlands servers.
+
 #### 8.3.0
 * Now prevents duplicated groups from being created.
 

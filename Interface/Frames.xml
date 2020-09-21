@@ -51,7 +51,6 @@
 						</Anchor>
 					</Anchors>
 				</Texture>
-				<TexCoords left="0.0" right="0.7578125" top="0.0" bottom="0.328125"/>
 			</Layer>
 			<Layer level="OVERLAY">
 				<FontString parentKey="Name" inherits="GameFontHighlightSmall" justifyH="LEFT">
@@ -178,18 +177,6 @@
 		<Anchors>
 			<Anchor point="BOTTOMRIGHT" x="7" y="150"/>
 		</Anchors>
-
-		<Backdrop bgFile="Interface\Tooltips\UI-Tooltip-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
-			<EdgeSize>
-				<AbsValue val="16"/>
-			</EdgeSize>
-			<TileSize>
-				<AbsValue val="16"/>
-			</TileSize>
-			<BackgroundInsets>
-				<AbsInset left="4" right="4" top="4" bottom="4"/>
-			</BackgroundInsets>
-		</Backdrop>
 
 		<Scripts>
 			<OnClick>

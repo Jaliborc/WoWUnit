@@ -105,12 +105,14 @@ function WoWUnit.Scroll:update()
 				button.Bar.Right:SetWidth(10)
 				button.Bar.Left:SetWidth(92)
 			else
+				button.Background:SetTexCoord(0, 0.7578125, 0, 0.328125)
+
 				if isHeader then
-					button.Bar.Right:SetTexCoord(0, 0.15234375, 0.390625, 0.625)
-					button.Bar.Left:SetTexCoord(0.765625, 1, 0.46875, 0.28125)
+					button.Bar.Right:SetTexCoord(0.0, 0.15234375, 0.390625, 0.625)
+					button.Bar.Left:SetTexCoord(0.765625, 1.0, 0.046875, 0.28125)
 				else
-					button.Bar.Right:SetTexCoord(0, 0.1640625, 0.34375, 0.671875)
-					button.Bar.Left:SetTexCoord(0.7578125, 1, 0, 0.328125)
+					button.Bar.Right:SetTexCoord(0.0, 0.1640625, 0.34375, 0.671875)
+					button.Bar.Left:SetTexCoord(0.7578125, 1.0, 0.0, 0.328125)
 				end
 			end
 		end
@@ -124,6 +126,11 @@ function WoWUnit.Scroll:update()
 	self:SetPoint('BOTTOMRIGHT', overflow and -25 or 0, 7)
 end
 
+if BackdropTemplateMixin then
+	Mixin(WoWUnitToggle, BackdropTemplateMixin)
+end
+
+WoWUnitToggle:SetBackdrop(TOOLTIP_BACKDROP_STYLE_DEFAULT)
 WoWUnit:SetScript('OnEvent', WoWUnit.OnEvent)
 WoWUnit:SetScript('OnShow', WoWUnit.OnShow)
 WoWUnit_SV = WoWUnit_SV or {}
