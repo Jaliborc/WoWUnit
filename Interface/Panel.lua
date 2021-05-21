@@ -98,7 +98,7 @@ function WoWUnit.Scroll:update()
 			button.Bar.Right:SetHeight(height)
 			button.Bar.Left:SetHeight(height)
 
-			if WOW_PROJECT_ID == WOW_PROJECT_CLASSIC then
+			if WOW_PROJECT_ID ~= WOW_PROJECT_MAINLINE then
 				button.Background:SetTexCoord(0, 0.48, 0, 0.328125)
 				button.Bar.Right:SetTexCoord(0, 0.0625, 0.34375, 0.671875)
 				button.Bar.Left:SetTexCoord(0.48, 1, 0, 0.328125)

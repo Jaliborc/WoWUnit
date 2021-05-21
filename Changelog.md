@@ -1,3 +1,6 @@
+#### 9.0.1
+* Now compatible with Burning Crusade servers.
+
 #### 9.0.0
 * Now compatible with Shadowlands servers.
 
