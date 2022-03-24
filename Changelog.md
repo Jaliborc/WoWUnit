@@ -1,3 +1,10 @@
+#### 9.1.1
+* Fixed issue with error counter display in some servers.
+* Error counter button now resizes depending on its text length.
+
+#### 9.1.0
+* Updated for Chains of Domination.
+
 #### 9.0.1
 * Now compatible with Burning Crusade servers.
 

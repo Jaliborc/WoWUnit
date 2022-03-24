@@ -18,8 +18,9 @@ function WoWUnit:OnEvent(event)
 
 		local status, count = self.Group.Status(self)
 		local color = COLORS[status]
-		WoWUnitToggle:SetBackdropColor(color.r, color.g, color.b)
 		WoWUnitToggle:SetText(count)
+		WoWUnitToggle:SetWidth(WoWUnitToggle:GetTextWidth() + 14)
+		WoWUnitToggle:SetBackdropColor(color.r, color.g, color.b)
 	end, 5)
 end
 
@@ -130,7 +131,14 @@ if BackdropTemplateMixin then
 	Mixin(WoWUnitToggle, BackdropTemplateMixin)
 end
 
-WoWUnitToggle:SetBackdrop(TOOLTIP_BACKDROP_STYLE_DEFAULT)
+WoWUnit_SV = WoWUnit_SV or {}
 WoWUnit:SetScript('OnEvent', WoWUnit.OnEvent)
 WoWUnit:SetScript('OnShow', WoWUnit.OnShow)
-WoWUnit_SV = WoWUnit_SV or {}
+WoWUnitToggle:SetBackdrop({
+	bgFile = 'Interface/Tooltips/UI-Tooltip-Background',
+	edgeFile = 'Interface/Tooltips/UI-Tooltip-Border',
+	insets = { left = 4, right = 4, top = 4, bottom = 4 },
+	tileSize = 16, edgeSize = 16, tile = true, tileEdge = true,
+	backdropColor = TOOLTIP_DEFAULT_BACKGROUND_COLOR,
+	backdropBorderColor = TOOLTIP_DEFAULT_COLOR,
+})

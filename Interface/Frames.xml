@@ -173,9 +173,9 @@
 	</Frame>
 
 	<Button name="WoWUnitToggle" parent="UIParent" hidden="false" clampedToScreen="false">
-		<Size x="30" y="80"/>
+		<Size x="30" y="90"/>
 		<Anchors>
-			<Anchor point="BOTTOMRIGHT" x="7" y="150"/>
+			<Anchor point="BOTTOMRIGHT" x="8" y="150"/>
 		</Anchors>
 
 		<Scripts>
@@ -185,5 +185,10 @@
 		</Scripts>
 
 		<NormalFont style="GameFontHighlightHuge"/>
+		<ButtonText justifyH='LEFT'>
+			<Anchors>
+				<Anchor point="LEFT" x="4" y="0"/>
+			</Anchors>
+		</ButtonText>
 	</Button>
 </Ui>
