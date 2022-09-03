@@ -1,4 +1,7 @@
-#### 9.1.1
+#### 9.2
+* Now compatible with Wrath of the Lich King servers.
+
+##### 9.1.1
 * Fixed issue with error counter display in some servers.
 * Error counter button now resizes depending on its text length.
 
