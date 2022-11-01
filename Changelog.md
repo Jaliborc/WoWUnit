@@ -1,3 +1,6 @@
+#### 10.0
+* TOC update.
+
 #### 9.2
 * Now compatible with Wrath of the Lich King servers.
 

@@ -6,7 +6,7 @@
 ## X-License: GNU General Public License Version 3
 ## X-Category: Developer Tools
 ## SavedVariables: WoWUnit_SV
-## Version: 9.2
+## Version: 10.0
 
 Interface\Frames.xml
 Interface\Panel.lua
