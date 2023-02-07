@@ -1,6 +1,6 @@
 ## Interface: 11403
 ## Title: |cffE5E5E5WoWUnit|r
-## Notes: Unit testing toolset for World of Warcraft
+## Notes: Unit testing toolset for World of Warcraft|n|cffbbbbbbBy João Cardoso|r|n|n |cff82c5ffpatreon.com/jaliborc|r|n |cff82c5ffpaypal.me/jaliborc|r|n |cff82c5ffbit.ly/discord-jaliborc|r
 ## Author: Jaliborc (João Cardoso)
 
 ## X-License: GNU General Public License Version 3
