@@ -35,6 +35,13 @@ We can make the following tests:
         AreEqual('Horseshoe!', Realm())
     end
 
+## Integration
+The easiest way to integrate unit testing into your addon is to add `## OptionalDeps: WoWUnit` to your `.toc` file. Then, check for WoWUnit in your code before running tests:
+
+    if WoWUnit then
+        local Tests = WoWUnit('MyTests')
+        ... etc
+    end
 
 ## Test API
 A unit test group is created by calling `WoWUnit(name, event1, event2, ...)` or `WoWUnit:NewGroup(name, event1, event2, ...)`.
@@ -52,3 +59,6 @@ A unit test is defined by indexing a function in the group. While the test is ru
 | ClearReplaces() | Resets all replacements done so far. |
 | Enable() | Enables the current unit test (enabled by default). |
 | Disable() | Disables the current unit test. |
+
+## To Devs
+If you use this tool, please list `wow-unit` as a tool you used in development on the CurseForge dependencies system. It's a big help! 👍
