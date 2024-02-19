@@ -1,5 +1,5 @@
 
-![Panels](http://jaliborc.com/images/addons/large/wowunit.jpg)
+![Panels](http://jaliborc.com/media/addons/large/wowunit.jpg)
 
 # WoWUnit :microscope:
 
