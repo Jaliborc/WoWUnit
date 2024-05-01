@@ -28,7 +28,7 @@ function WoWUnit:OnShow()
 	HybridScrollFrame_CreateButtons(self.Scroll, 'WoWUnitButtonTemplate', 2, -4, 'TOPLEFT', 'TOPLEFT', 0, -3)
 
 	self:SortRegistry()
-	self.TitleText:SetText('Unit Tests')
+	self.TitleText:SetText('|Tinterface/addons/wowunit/art/gnomed:16:16|t Unit Tests')
 	self.Scroll:update()
 end
 
@@ -142,3 +142,11 @@ WoWUnitToggle:SetBackdrop({
 	backdropColor = TOOLTIP_DEFAULT_BACKGROUND_COLOR,
 	backdropBorderColor = TOOLTIP_DEFAULT_COLOR,
 })
+
+if AddonCompartmentFrame then
+	AddonCompartmentFrame:RegisterAddon {
+		text = 'WoWUnit', keepShownOnClick = true, notCheckable = true,
+		icon = 'interface/addons/wowunit/art/gnomed',
+		func = function() WoWUnit:SetShown(not WoWUnit:IsShown()) end
+	}
+end
