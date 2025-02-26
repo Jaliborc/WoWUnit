@@ -1,5 +1,5 @@
 ## Title: WoWUnit
-## IconTexture: Interface/Addons/WoWUnit/Art/Gnomed
+## IconTexture: Interface/Addons/WoWUnit/Art/Techbook
 ## Notes: Unit testing toolset for World of Warcraft|n|cffbbbbbbBy João Cardoso|r|n|n|TInterface/Addons/WoWUnit/Art/Patreon:12:12|t |cff82c5ffpatreon.com/jaliborc|r|n|TInterface/Addons/WoWUnit/Art/Paypal:12:12|t |cff82c5ffpaypal.me/jaliborc|r|n|TInterface/Addons/WoWUnit/Art/Discord:12:12:0:-2|t |cff82c5ffbit.ly/discord-jaliborc|r
 ## X-License: All Rights Reserved
 ## X-Category: Developer Tools
@@ -7,7 +7,7 @@
 
 ## SavedVariables: WoWUnit_SV
 ## Interface: 30403
-## Version: 10.1
+## Version: 11.1
 
 Interface\Frames.xml
 Interface\Panel.lua

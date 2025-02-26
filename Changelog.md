@@ -1,3 +1,7 @@
+## 11.1
+* Updated for The War Within.
+* Retail: Added support for the new addon list native grouping capabilities.
+
 ### 10.1
 * Now compatible with Cataclysm servers.
 * Now compatible with AddonCompartmentFrame and Addon IconTexture APIs.
