@@ -150,3 +150,5 @@ if AddonCompartmentFrame then
 		func = function() WoWUnit:SetShown(not WoWUnit:IsShown()) end
 	}
 end
+
+dump = DevTools_Dump

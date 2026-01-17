@@ -1,3 +1,9 @@
+### 11.2
+* Added support for TBC Anniversary realms.
+
+### 11.1.1
+* Added support for Midnight open beta.
+
 ## 11.1
 * Updated for The War Within.
 * Retail: Added support for the new addon list native grouping capabilities.
