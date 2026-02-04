@@ -1,3 +1,6 @@
+## 12.0
+* Added support for Midnight servers.
+
 ### 11.2
 * Added support for TBC Anniversary realms.
 

@@ -7,7 +7,7 @@
 
 ## SavedVariables: WoWUnit_SV
 ## Interface: 20505
-## Version: 11.2
+## Version: 12.0
 
 Interface\Frames.xml
 Interface\Panel.lua
