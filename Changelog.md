@@ -1,3 +1,7 @@
+### 12.0.1
+* Improved toc on Mists and Classic servers.
+* Fixed mistake which caused the addon to appear in the wrong category.
+
 ## 12.0
 * Added support for Midnight servers.
 
