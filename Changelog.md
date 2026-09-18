@@ -1,3 +1,6 @@
+### 12.1
+* Updated TOC for Forever, Classic and Retail.
+
 ### 12.0.1
 * Improved toc on Mists and Classic servers.
 * Fixed mistake which caused the addon to appear in the wrong category.

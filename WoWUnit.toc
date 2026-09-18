@@ -6,8 +6,8 @@
 ## Author: Jaliborc & Tuller
 
 ## SavedVariables: WoWUnit_SV
-## Interface: 120001, 120000, 50501, 40402, 30404, 20505, 11507
-## Version: 12.0.1
+## Interface: 120100, 50504, 40402, 30404, 20506, 16001, 11509
+## Version: 12.1
 
 Interface\Frames.xml
 Interface\Panel.lua
