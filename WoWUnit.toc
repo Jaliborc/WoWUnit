@@ -3,7 +3,7 @@
 ## Notes: Unit testing toolset for World of Warcraft|n|cffbbbbbbBy João Cardoso|r|n|n|TInterface/Addons/WoWUnit/Art/Patreon:12:12|t |cff82c5ffpatreon.com/jaliborc|r|n|TInterface/Addons/WoWUnit/Art/Paypal:12:12|t |cff82c5ffpaypal.me/jaliborc|r|n|TInterface/Addons/WoWUnit/Art/Discord:12:12:0:-2|t |cff82c5ffbit.ly/discord-jaliborc|r
 ## X-License: All Rights Reserved
 ## Category: Developer Tools
-## Author: Jaliborc & Tuller
+## Author: Jaliborc
 
 ## SavedVariables: WoWUnit_SV
 ## Interface: 120100, 50504, 40402, 30404, 20506, 16001, 11509
